@@ -1,0 +1,22 @@
+{
+  "name": "baseball-plugin-mv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HardPlant/BaseBall_Plugin.git"
+  },
+  "author": "HardPlant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HardPlant/BaseBall_Plugin/issues"
+  },
+  "homepage": "https://github.com/HardPlant/BaseBall_Plugin#readme",
+  "dependencies": {
+    "jest": "^24.8.0"
+  }
+}
