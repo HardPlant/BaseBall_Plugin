@@ -13,20 +13,29 @@ var HP_Baseball_Game = Object.create(null);
         $.endGame();
     };
     
-    $.choosePlayerNumber = function() {
-
+    $.choosePlayerNumber = function(player_num) {
+        $._playerNumber = player_num;
     };
-    $.chooseEnemyNumber = function() {
-
+    $.chooseEnemyNumber = function(enemy_num) {
+        $._enemyNumber = enemy_num;
     };
     $.selectFirstTurnPlayer = function() {
 
     };
-    $.progressFirstTurn = function() {
-
-    };
-    $.progressLateTurn = function() {
-
+    $.progressTurn = function() {
+        // 
+        var estimatedArray = [];
+        var targetArray = $._playerNumber;
+        
+        for (var i = 0; i < targetArray; i++) {
+            if (_isStrike(estimatedArray, i, targetArray)) {
+                strike++;
+            }
+            if (_isBall(estimatedArray, i, targetArray)) {
+                ball++;
+            }
+        };
+        console.log("스트라이크: " + strike + "볼: " + ball);
     };
     $.isGameEnded = function() {
 
