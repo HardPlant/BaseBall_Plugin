@@ -26,7 +26,8 @@ var HP_Baseball_Game = Object.create(null);
         // 
         var estimatedArray = [];
         var targetArray = $._playerNumber;
-        
+        var strike = 0;
+        var ball = 0;
         for (var i = 0; i < targetArray; i++) {
             if (_isStrike(estimatedArray, i, targetArray)) {
                 strike++;
@@ -36,6 +37,12 @@ var HP_Baseball_Game = Object.create(null);
             }
         };
         console.log("스트라이크: " + strike + "볼: " + ball);
+        
+        if ($.isGameEnded(strike)) {
+            endGame();
+        } else {
+            progressTurn();
+        }
     };
     $.isGameEnded = function() {
 
