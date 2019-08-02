@@ -14,10 +14,23 @@ var HP_Baseball_Game = Object.create(null);
     };
     
     $.choosePlayerNumber = function(player_num) {
-        $._playerNumber = player_num;
+        if (typeof(player_num) !== "string") {
+            console.error("");
+            return;
+        }
+
+        player_num = player_num.split("");
+        this._playerNumber = player_num;
     };
     $.chooseEnemyNumber = function(enemy_num) {
-        $._enemyNumber = enemy_num;
+
+        if (typeof(enemy_num) !== "string") {
+            console.error("");
+            return;
+        }
+
+        enemy_num = enemy_num.split("");
+        this._enemyNumber = enemy_num;
     };
     $.selectFirstTurnPlayer = function() {
 
@@ -53,7 +66,8 @@ var HP_Baseball_Game = Object.create(null);
     function _isStrike(src, idx, dest) {
         if (src[idx] === dest[idx]) {
             return true;
-        return false;
+        }
+            return false;
     };
     function _isBall(src, idx, dest) {
         for (var i = 0; i < dest.length; i++) {
