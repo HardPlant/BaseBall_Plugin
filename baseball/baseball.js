@@ -32,36 +32,46 @@ var HP_Baseball_Game = Object.create(null);
         enemy_num = enemy_num.split("");
         this._enemyNumber = enemy_num;
     };
-    $.selectFirstTurnPlayer = function() {
-
-    };
-    $.progressTurn = function() {
-        // 
-        var estimatedArray = [];
-        var targetArray = $._playerNumber;
-        var strike = 0;
-        var ball = 0;
-        for (var i = 0; i < targetArray; i++) {
-            if (_isStrike(estimatedArray, i, targetArray)) {
-                strike++;
-            }
-            if (_isBall(estimatedArray, i, targetArray)) {
-                ball++;
-            }
-        };
-        console.log("스트라이크: " + strike + "볼: " + ball);
-        
-        if ($.isGameEnded(strike)) {
-            endGame();
+    $.selectFirstTurnPlayer = function(rand) {
+        var random = rand || Math.random();
+        if (random < 0.5) {
+            this._isPlayerTurn = true;
         } else {
-            progressTurn();
+            this._isPlayerTurn = false;
         }
     };
-    $.isGameEnded = function() {
-
+    $.progressTurn = function(estimatedArray) {
+        if (this._isPlayerTurn) {
+            var targetArray = this._playerNumber;
+        } else {
+            var targetArray = this._enemyNumber;
+        }
+        this._strike = 0;
+        this._ball = 0;
+        for (var i = 0; i < targetArray.length; i++) {
+            if (_isStrike(estimatedArray, i, targetArray)) {
+                this._strike++;
+            }
+            if (_isBall(estimatedArray, i, targetArray)) {
+                this._ball++;
+            }
+        };
+        if ($.isGameEnded(this._strike)) {
+            $.endGame();
+        } else {
+            this._isPlayerTurn = !this._isPlayerTurn;
+        }
+        return {
+            strike: this._strike,
+            ball: this._ball
+        }
+    };
+    $.isGameEnded = function(strike) {
+        if (strike === 3) return true;
+        return false;
     };
     $.endGame = function() {
-
+        $._gameEnded = true;
     };
     function _isStrike(src, idx, dest) {
         if (src[idx] === dest[idx]) {
