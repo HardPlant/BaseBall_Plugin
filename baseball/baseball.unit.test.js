@@ -46,3 +46,21 @@ it("ends game", function() {
     expect(HP_Baseball_Game._strike).toBe(3);
     expect(HP_Baseball_Game._gameEnded).toBe(true);
 });
+
+it("counts turn", function() {
+    HP_Baseball_Game.reset();
+    expect(HP_Baseball_Game._turns).toBe(undefined);
+
+    var player_num = "123";
+    HP_Baseball_Game.choosePlayerNumber(player_num);
+
+    var enemy_number = "456";
+    HP_Baseball_Game.chooseEnemyNumber(enemy_number);
+
+    HP_Baseball_Game.selectFirstTurnPlayer();
+    expect(HP_Baseball_Game._turn).toBe(1);
+
+    HP_Baseball_Game.progressTurn(["1","2","4"]);
+
+    expect(HP_Baseball_Game._turn).toBe(2);
+});

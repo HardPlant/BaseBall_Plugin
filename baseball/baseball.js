@@ -1,18 +1,24 @@
 var HP_Baseball_Game = Object.create(null);
 
 (function($) {
-    $.run = function() {
-        $.choosePlayerNumber();
-        $.chooseEnemyNumber();
-        $.selectFirstTurnPlayer();
+    // $.consoleRun = function() {
+    //     $.choosePlayerNumber(player_num);
+    //     $.chooseEnemyNumber(enemy_num);
+    //     $.selectFirstTurnPlayer();
         
-        while($.isGameEnded()) {
-            $.progressFirstTurn();
-            $.progressLateTurn();
-        }
-        $.endGame();
+    //     while($._gameEnded) {
+    //         $.progressTurn();
+    //     }
+    //      $.displayResult();
+    // };
+    $.reset = function() {
+        this._playerNumber = undefined;
+        this._enemyNumber = undefined;
+        this._turn = undefined;
+        this._gameEnded = undefined;
+        this._strike = undefined;
+        this._ball = undefined;
     };
-    
     $.choosePlayerNumber = function(player_num) {
         if (typeof(player_num) !== "string") {
             console.error("");
@@ -39,6 +45,7 @@ var HP_Baseball_Game = Object.create(null);
         } else {
             this._isPlayerTurn = false;
         }
+        this._turn = 1;
     };
     $.progressTurn = function(estimatedArray) {
         if (this._isPlayerTurn) {
@@ -56,9 +63,10 @@ var HP_Baseball_Game = Object.create(null);
                 this._ball++;
             }
         };
-        if ($.isGameEnded(this._strike)) {
+        if ($.isGameEndCondition(this._strike)) {
             $.endGame();
         } else {
+            this._turn++;
             this._isPlayerTurn = !this._isPlayerTurn;
         }
         return {
@@ -66,7 +74,7 @@ var HP_Baseball_Game = Object.create(null);
             ball: this._ball
         }
     };
-    $.isGameEnded = function(strike) {
+    $.isGameEndCondition = function(strike) {
         if (strike === 3) return true;
         return false;
     };
